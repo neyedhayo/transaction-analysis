@@ -14,6 +14,7 @@ def visualize(files):
         # Data cleaning steps
         transaction_data = data[['account_id', 'amount', 'status', 'created_at']]
         transaction_data['created_at'] = pd.to_datetime(transaction_data['created_at'], format = '%d/%m/%Y %H:%M')
+        transaction_data = transaction_data.rename(columns={'account_id': 'AccountID', 'amount': 'TransactionAmount', 'status': 'Status', 'created_at': 'DatePeriod'}) #.rename_axis('DateTime')
         transaction_data.set_index('created_at', inplace=True)
 
         dataframes.append(transaction_data)
