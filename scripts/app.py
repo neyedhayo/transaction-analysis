@@ -1,5 +1,6 @@
 import gradio as gr
 import pandas as pd
+from visualization import visualize_users_exceeding_50, isualize_highest_monthly_transaction_user
 
 
 def visualize(files):
@@ -17,11 +18,14 @@ def visualize(files):
         dataframes.append(transaction_data)
 
     # Function call of visualization
-    
+    vis1 = visualize_users_exceeding_50(dataframes[0])
+    vis2 = visualize_highest_monthly_transaction_user(dataframes[0])
+
+    return vis1, vis2
 
 
 # Gradio interface
-demo = gr.Interface(fn=greeting, inputs='text', outputs='text')
+demo = gr.Interface(fn=visualize, inputs='file', outputs=['image', 'image'])
 
 if __name__ == "__main__":
     demo.launch(show_api=False)
